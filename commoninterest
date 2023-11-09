@@ -1,0 +1,24 @@
+import requests
+import json
+
+# L
+key = '5SNze1Nl5dilZ9TwXOJf'
+base_url = 'https://neo4j.look4kol.com/v1/followers/'
+
+#
+usernames = ['hk.dict', 'nkcfung', 'itsharont','eat.the.worlds','calvincso']  #
+
+#
+data = {}
+for username in usernames:
+    url = f'{base_url}{username}/percentage/genres/'
+    headers = {'key': key}
+    response = requests.get(url, headers=headers)
+    response_data = json.loads(response.text)
+    kol_data = response_data.get('data', [])
+    data[username] = [item['item'] for item in kol_data]
+
+#
+common_items = set(data[usernames[0]])
+for username in usernames[1:]:
+    common_items = common_items.intersection(set(data[username]))
