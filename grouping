@@ -1,0 +1,24 @@
+import requests
+import json
+
+key = '5SNze1Nl5dilZ9TwXOJf'
+
+
+usernames = ['hk.dict', 'nkcfung', 'itsharont','eat.the.worlds','calvincso','michellee_diary','winnie20058','sophronia218',
+             'Kpl6be6','62.loya']  # 在这里添加您想要的用户名
+
+data = {}
+
+for username in usernames:
+    url = f'https://neo4j.look4kol.com/v1/followers/{username}/percentage/genres/'
+    headers = {'key': key}
+    response = requests.get(url, headers=headers)
+    data_json = json.loads(response.text)
+    kol_data = data_json.get('data', [])
+    data[username] = kol_data
+
+# print result
+for username, kol_data in data.items():
+    print(f'username: {username}')
+    print(f'kol_data: {kol_data}')
+    print('---')
