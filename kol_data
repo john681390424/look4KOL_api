@@ -1,0 +1,18 @@
+import requests
+import json
+
+username = 'bosco_ho_fat_c'
+key = '5SNze1Nl5dilZ9TwXOJf'
+
+url = f'https://neo4j.look4kol.com/v1/followers/{username}/percentage/genres/'
+
+
+headers = {
+    'key': key,
+}
+
+response = requests.get(url, headers=headers)
+
+data = json.loads(response.text)
+kol_data = data['data']
+kol_data
